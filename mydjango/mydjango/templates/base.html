@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <link
+          rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+
+        <!  rel="stylesheet"
+        <!  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        <!  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        <!  crossorigin="anonymous">
+
+
+      <!rel="stylesheet"
+      <!href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      <!integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      <!crossorigin="anonymous"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <title>AGA {% block title %}{% endblock %}</title>
+
+</head>
+
+
+    <table width="1400" border="0">
+        <tr>
+             <td>
+                {% load static %}
+                <img src="{% static  'ai/logo_aga.jpg' %}" alt="logo"  width="245" height="150">
+            </td>
+            <td>
+               <h2>  Аналитическая группа Амелина  </h2>
+            </td>
+        </tr>
+
+        <tr>
+            <td
+                colspan="2" style="background-color:#3399FF;">
+                <!<p style=color:white > <!Соберем для Вас все, что Вы не знали о своем предприятии..., но не хотели бы не знать ... <!</p>
+                <p style=color:white > Цифровые технологии по сбору, хранению и обработке информации для предприятий ... </p>
+
+            </td>
+        </tr>
+
+        <tr valign="top">
+        <td>
+            <! Диспетчер технологических процессов <br />
+        </td>
+        </tr>
+    </table>
+
+<hr />
+
+
+            <ul class="nav nav-tabs nav-fill">
+                 <li class="nav-item">
+                    {% url 'ai:start' as url_start %}
+                    <a class = " nav-link {% if url_start == request.path %}active{% endif %} " href = "{{url_start}}">Главная</a>
+                 </li>
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Банкам</a>
+                    <div class="dropdown-menu">
+                        {% url 'ai:pdstart' as url_pdstart %}
+                        <a class="dropdown-item" href="{{url_pdstart}}">Вероятность дефолта банка</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                 </li>
+
+                 <li class="nav-item dropdown">
+                    {% url 'webex:detal' 6 as url_webex_detal %}
+                    <!<a class = " nav-link {% if url_webex_detal == request.path %}activate{% endif %} " href = "{{url_webex_detal}}"> <!Услуги</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Услуги</a>
+                    <div class="dropdown-menu">
+                        {% url 'ai:pdstart' as url_pdstart %}
+                        <a class="dropdown-item" href="{{url_webex_detal}}">Услуги </a>
+                        {% url 'ai:sendsms' as url_sendsms %}
+                        <a class="dropdown-item" href="{{url_sendsms}}">Отправить СМС </a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                 </li>
+                 <li class="nav-item">
+
+                    {% url 'webex:detal' 2 as url_webex_detal %}
+                     {% url 'webex:smarp_page' as url_webex_detal_smarp_page %}
+                    <!<a class = " nav-link {% if url_webex_detal == request.path %}activate{% endif %} " href = "{{url_webex_detal}}"> <!Пректирование</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Пректирование</a>
+                    <div class="dropdown-menu">
+                        {% url 'ai:pdstart' as url_pdstart %}
+                        <a class="dropdown-item" href="{{url_webex_detal}}">Диспетчер технологических процессов </a>
+                        <a class="dropdown-item" href="#">Накопление и анализ больших данных</a>
+                        <a class="dropdown-item" href="#">Искусственный интеллект (AI)</a>
+                    <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Интернет вещей (IoT)</a>
+                        <a class="dropdown-item" href="#">Мониторинг состояния окружающей среды</a>
+                        <a class="dropdown-item" href="{{url_webex_detal_smarp_page}}">Мониторинг противопожарной безопасности</a>
+                        <a class="dropdown-item" href="{% static 'smarp.pdf' %}">СМАРП</a>
+
+                    </div>
+                 </li>
+
+                 <li class="nav-item">
+                    {% url 'webex:detal' 7 as url_webex_detal %}
+                    <a class = " nav-link {% if url_webex_detal == request.path %}active{% endif %} " href = "{{url_webex_detal}}">Контакты</a>
+                 </li>
+
+                 <li class="nav-item">
+                    {% url 'webex:detal' 5 as url_webex_detal %}
+                    <a class = " nav-link {% if url_webex_detal == request.path %}active{% endif %} " href = "{{url_webex_detal}}">О компании</a>
+                 </li>
+
+                  {% if request.user.is_authenticated %}
+                    {% if request.user.is_superuser %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Администратор</a>
+                    <div class="dropdown-menu">
+                        {% url 'ai:deposit_page' as url_deposit %}
+                        {% url 'ai:serv_page' as url_serv %}
+                        {% url 'ai:mail_page' as url_mail %}
+
+
+                        <a class="dropdown-item" href="{{url_deposit}}">Пополнение базы данных</a>
+                        <a class="dropdown-item" href="{{url_serv}}" >Служебная процедура</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                     <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{url_mail}}">Отправить e-mail</a>
+                    </div>
+                    </li>
+                    {% endif %}
+
+                        {% url 'ai:rascheti2' as url_rascheti %}
+                        {% url 'ai:password_change' as url_password_change %}
+                        {% url 'ai:password_reset' as url_password_reset %}
+                 <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Расчеты</a>
+                    <div class="dropdown-menu">
+                        {% url 'ai:deposit_page' as url_deposit %}
+                        <a class="dropdown-item" href="{{url_deposit}}">Пополнить счет</a>
+                        <a class="dropdown-item" href="{{url_rascheti}}" >Получить выписку</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                     <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{url_password_change}}">Сменить пароль</a>
+                        <a class="dropdown-item" href="{{url_password_reset}}">Сбросить пароль</a>
+                    </div>
+                 </li>
+                 <li class="nav-item">
+                        {% url 'ai:logout_page' as url_logout_page %}
+                        <!<a class = " nav-link.btn-danger.ml-5 {% if url_logout_page == request.path %}activate{% endif %} " href = "{{url_logout_page}}"><!Выход</a>
+                         <a class = " nav-link {% if url_logout_page == request.path %}active{% endif %} " href = "{{url_logout_page}}">Выход</a>
+                 </li>
+                    {% else %}
+                      <li class="nav-item">
+                        {% url 'ai:login_page' as url_login_page %}
+                        <a class = " nav-link {% if url_login_page == request.path %}active{% endif %} " href = "{{url_login_page}}">Авторизация</a>
+                      </li>
+                      <li class="nav-item">
+                        {% url 'ai:register_page' as url_register_page %}
+                          {% url 'ai:offerta_page' as url_offerta_page %}
+                        <! <a class = " nav-link {% if url_register_page == request.path %}activate{% endif %} " href = "{{url_register_page}}"> <!Регистрация</a>
+                        <a class = " nav-link {% if url_offerta_page == request.path %}active{% endif %} " href = "{{url_offerta_page}}"> Регистрация</a>
+                       </li>
+                    {% endif %}
+               </ul>
+
+          <ul class="nav justify-content-end">
+
+          {% if request.user.is_authenticated %}
+
+            Авторизованный пользователь : {{request.user}}  <br />
+            Текущий счет: {{Acc}} руб.
+
+          {% else %}
+            Гость : {{request.user}}
+          {% endif %}
+          </ul>
+<hr />
+
+
+
+
+
+<body>
+  <!-- NavBar -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 m-auto">
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>

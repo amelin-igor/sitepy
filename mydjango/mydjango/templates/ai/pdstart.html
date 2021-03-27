@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Определение PD{% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.0.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.0.1.min.css"/>
+
+<h3> Искусственная нейросеть определения вероятности дефолта банка  </h3>
+<p> {{info}} </p>
+
+
+
+
+
+{% if request.user.is_authenticated %}
+    <form action = "{% url 'ai:pdcalc' %}" method = "POST">
+
+        {% csrf_token %}
+        <input type="text" required placeholder="Введите номер лицензии" name = "name"><br>
+        <button type="submit">Выполнить расчет PD</button>
+    </form>
+{% else %}
+       Для продолжения требуется авторизация
+{% endif %}
+
+
+
+
+{% endblock %}

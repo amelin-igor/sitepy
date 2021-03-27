@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{latest_metering_list.meter_title}}{% endblock %}
+
+{% block content %}
+
+  {% if latest_metering_list %}
+        {% for a in latest_metering_list %}
+
+              <a href="{% url 'ai:addcom' a.id %}">{{a.meter_title}}</a>
+              Температура : {{a.meter_temperature}} C |
+              Влажность   : {{a.meter_humidity}}% |
+              Конц-ия CO2 : {{a.meter_CO2}}% |
+              Конц-ия CH4 : {{a.meter_CH4}}% |
+              Конц-ия N2O : {{a.meter_N2O}}% |
+              Дата        : {{a.meter_datetime}}% |   <br />
+
+        {% endfor %}
+   {% else %}
+     Измерения не найдены
+   {% endif %}
+
+
+{% endblock %}

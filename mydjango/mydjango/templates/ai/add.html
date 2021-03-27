@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Датчики{% endblock %}
+
+{% block content %}
+
+    <h2> Данные датчиков </h2>
+
+    <p> Кличка (учетный номер) коровы  {{metering.meter_title}} (#1415) </p>
+
+    <p> Температура {{metering.meter_temperature}} С </p>
+
+    <p> Влажность {{metering.meter_humidity}} %</p>
+
+    <p> Уровень CO2 {{metering.meter_CO2}} %</p>
+
+    <p> Уровень CH4 {{metering.meter_CH4}} %</p>
+
+    <p> Уровень N2O {{metering.meter_N2O}} %</p>
+
+    <p> Время измерения {{metering.meter_datetime}} </p>
+
+    <p> Комментарии системы {{metering.meter_text}} </p>
+
+
+
+{% endblock %}
+

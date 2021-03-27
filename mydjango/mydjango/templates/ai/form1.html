@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}{{name.name}}{% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.0.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.0.1.min.css"/>
+
+<h1> form1 </h1>
+
+
+
+<form action = "{% url 'ai:leave_comment2' metering.id %}" method = "POST">
+
+        {% csrf_token %}
+        <input type="text" required placeholder="Ваше имя" name = "name"><br>
+        <textarea name = "text" required = "" placeholder="Текст комментария" cols="30" rows="10"></textarea><br>
+
+        <button type="submit">Оставить комментарий</button>
+
+    </form>
+
+{% endblock %}

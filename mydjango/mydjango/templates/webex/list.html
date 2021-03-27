@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}{{article.article_title}}{% endblock %}
+{% block content %}
+
+  {% if latest_artical_list %}
+        {% for a in latest_artical_list %}
+
+              <a href="{% url 'webex:detal' a.id %}">{{a.article_title}}</a>
+              <br />
+
+        {% endfor %}
+   {% else %}
+     Статьи не найдены
+   {% endif %}
+
+
+{% endblock %}
+

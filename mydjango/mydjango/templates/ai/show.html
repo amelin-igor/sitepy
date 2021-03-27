@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} {{metter_of_buryonka.meter_title}} {% endblock %}
+
+{% block content %}
+
+    <hr>
+    {{metter_of_buryonka.meter_title}}
+
+    {% if metter_of_buryonka %}
+        {% for c in metter_of_buryonka %}
+            <p>
+               {{c.meter_title}} | {{c.meter_datetime}} | температура={{c.meter_temperature}} C | влажность={{c.meter_humidity}}% </br>
+            </p>
+        {% endfor %}
+
+    {% else %}
+        Измерения не найдены.
+    {% endif %}
+
+    <hr>
+
+
+
+{% endblock %}

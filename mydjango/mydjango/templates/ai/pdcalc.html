@@ -1,0 +1,444 @@
+{% extends 'base.html' %}
+
+{% block title %}PD CALC{% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.0.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.0.1.min.css"/>
+      <style>
+        .colortext {
+                color: red; /* Красный цвет выделения */
+                    }
+        </style>
+
+<table width="1150" border="0">
+        <tr>
+             <td>
+                Данные расчета вероятности дефолта  </br>
+                Банк: {{b_name}} |
+                Рег. номер:  {{b_regn}} |
+
+
+{{div| safe}}
+
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.0.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.0.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-api-2.0.1.min.js"></script>
+
+
+{{script|safe}}
+
+            </td>
+            <td>
+                <ul>
+
+                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_superuser %}
+                    <li>
+                        {% url 'ai:nabobj' as url_nabobj %}
+                        <a class = " nav_link {% if url_pdstart == request.path %}activate{% endif %} " href = "{{url_nabobj}}"> Наблюдаемые объекты (новая)</a>
+                    </li>
+                    <li>
+                        {% url 'ai:starter' Mumuka as url_ai_starter %}
+                         <a class = " nav_link {% if url_ai_starter == request.path %}activate{% endif %} " href = "{{url_ai_starter}}"> Мониторинг (новая)</a>
+                    </li>
+                    <li>
+                        {% url 'ai:show' as url_ai_show %}
+                         <a class = " nav_link {% if url_ai_show == request.path %}activate{% endif %} " href = "{{url_ai_show}}"> Телеметрия (новая)</a>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+
+                    <li>
+                         {% url 'ai:pdstart' as url_pdstart %}
+                        <a class = " nav_link {% if url_pdstart == request.path %}activate{% endif %} " href = "{{url_pdstart}}"> Определение вероятности дефолта банка </a>
+
+                    </li>
+                </ul>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+<hr>
+
+
+
+<!       № квартал   |   PD    |      PD(фильтр) </br>
+<!     {{y3.0.0}} | {{y3.1.0}} | {{y3.2.0}} </br>
+<!     {{y3.0.1}} | {{y3.1.1}} | {{y3.2.1}}</br>
+ <!    {{y3.0.2}} | {{y3.1.2}} | {{y3.2.2}}</br>
+<!     {{y3.0.3}} | {{y3.1.3}} | {{y3.2.3}}</br>
+<! {{y3.0.4}} | {{y3.1.4}} | {{y3.2.4}}</br>
+<! {{y3.0.5}} | {{y3.1.5}} | {{y3.2.5}}</br>
+<! {{y3.0.6}} | {{y3.1.6}} | {{y3.2.6}}</br>
+<! {{y3.0.7}} | {{y3.1.7}} | {{y3.2.7}}</br>
+<! {{y3.0.8}} | {{y3.1.8}} | {{y3.2.8}}</br>
+<! {{y3.0.9}} | {{y3.1.9}} | {{y3.2.9}}</br>
+
+
+
+<! PD(фильтр) </br>
+
+<hr>
+<h3> Результат работы ИНС: Вероятность дефолта банка и рейтинг  </h3>
+<hr>
+
+
+
+<div class="row">
+    <div class="col">
+       № квартал
+    </div>
+    <div class="col">
+       Дата
+    </div>
+    <div class="col">
+      PD
+    </div>
+    <div class="col">
+      PD(фильтр)
+    </div>
+    <div class="col">
+      Рейтинг
+    </div>
+    <div class="col">
+      Прогноз по рейтингу
+    </div>
+    <div class="col">
+      Время до дефолта, в годах
+    </div>
+    <div class="col">
+      Использована полноценная отчетность
+    </div>
+</div>
+<hr>
+
+{% if y1.any > 0 %}
+       {% for c in tab  %}
+
+
+<div class="row">
+    <div class="col">
+        {{c.0}}
+    </div>
+    <div class="col">
+        {{c.3}}
+    </div>
+    <div class="col">
+      {{c.1}}
+    </div>
+    <div class="col">
+       {{c.2}}
+    </div>
+     <div class="col">
+         {% if c.7 == 'false' %}
+            <span class="colortext"> N/A  </span>
+        {% else %}
+            {{c.4}}
+        {% endif %}
+
+    </div>
+    <div class="col">
+       {{c.5}}
+    </div>
+    <div class="col">
+       {{c.6}}
+    </div>
+    <div class="col">
+        {% if c.7 == 'false' %}
+            <span class="colortext"> {{c.7}}  </span>
+        {% else %}
+            {{c.7}}
+        {% endif %}
+    </div>
+</div>
+
+
+       {% endfor %}
+    {% else %}
+       Отклик нейросети отсутствует
+    {% endif %}
+
+
+<hr />
+
+<h3> Параметры, используемые искусственной нейросетью в качестве входных </h3>
+
+<hr>
+<div class="row">
+    <div class="col">
+       {{pokaz_shrot.0}}
+    </div>
+    <div class="col">
+       {{pokaz_shrot.1}}
+    </div>
+    <div class="col">
+      {{pokaz_shrot.2}}
+    </div>
+    <div class="col">
+      {{pokaz_shrot.3}}
+    </div>
+    <div class="col">
+      {{pokaz_shrot.4}}
+    </div>
+    <div class="col">
+     {{pokaz_shrot.5}}
+    </div>
+    <div class="col">
+    {{pokaz_shrot.6}}
+    </div>
+    <div class="col">
+       {{pokaz_shrot.7}}
+    </div>
+    <div class="col">
+      {{pokaz_shrot.8}}
+    </div>
+     <div class="col">
+      {{pokaz_shrot.9}}
+    </div>
+    <div class="col">
+      {{pokaz_shrot.10}}
+    </div>
+    <div class="col">
+      {{pokaz_shrot.11}}
+    </div>
+
+</div>
+<hr>
+
+{% if y1.any > 0 %}
+       {% for c in tab2  %}
+
+<div class="row">
+
+    <div class="col">
+        {{c.0}}
+    </div>
+    <div class="col">
+        {{c.1}}
+    </div>
+    <div class="col">
+      {{c.2}}
+    </div>
+    <div class="col">
+       {{c.3}}
+    </div>
+     <div class="col">
+       {{c.4}}
+    </div>
+    <div class="col">
+       {{c.5}}
+    </div>
+    <div class="col">
+       {{c.6}}
+    </div>
+    <div class="col">
+       {{c.7}}
+    </div>
+    <div class="col">
+       {{c.8}}
+    </div>
+    <div class="col">
+       {{c.9}}
+    </div>
+    <div class="col">
+       {{c.10}}
+    </div>
+    <div class="col">
+       {{c.11}}
+    </div>
+</div>
+       {% endfor %}
+    {% else %}
+       Отклик нейросети отсутствует
+    {% endif %}
+
+<hr>
+<h3> Параметры, используемые искусственной нейросетью в качестве входных (продолжение) </h3>
+<hr>
+<div class="row">
+    <div class="col">
+       {{pokaz_shrot.0}}
+    </div>
+    <div class="col">
+       {{pokaz_shrot.1}}
+    </div>
+    <div class="col">
+      {{pokaz_shrot.12}}
+    </div>
+    <div class="col">
+      {{pokaz_shrot.13}}
+    </div>
+    <div class="col">
+      {{pokaz_shrot.14}}
+    </div>
+    <div class="col">
+     {{pokaz_shrot.15}}
+    </div>
+    <div class="col">
+    {{pokaz_shrot.16}}
+    </div>
+    <div class="col">
+       {{pokaz_shrot.17}}
+    </div>
+    <div class="col">
+      {{pokaz_shrot.18}}
+    </div>
+     <div class="col">
+      {{pokaz_shrot.19}}
+    </div>
+    <div class="col">
+      {{pokaz_shrot.20}}
+    </div>
+    <div class="col">
+      {{pokaz_shrot.21}}
+    </div>
+
+</div>
+
+<hr>
+{% if y1.any > 0 %}
+       {% for c in tab2  %}
+<div class="row">
+
+    <div class="col">
+        {{c.0}}
+    </div>
+    <div class="col">
+        {{c.1}}
+    </div>
+    <div class="col">
+      {{c.12}}
+    </div>
+    <div class="col">
+       {{c.13}}
+    </div>
+     <div class="col">
+       {{c.14}}
+    </div>
+    <div class="col">
+       {{c.15}}
+    </div>
+    <div class="col">
+       {{c.16}}
+    </div>
+    <div class="col">
+       {{c.17}}
+    </div>
+    <div class="col">
+       {{c.18}}
+    </div>
+    <div class="col">
+       {{c.19}}
+    </div>
+    <div class="col">
+       {{c.20}}
+    </div>
+    <div class="col">
+       {{c.21}}
+    </div>
+</div>
+       {% endfor %}
+    {% else %}
+       Отклик нейросети отсутствует
+    {% endif %}
+
+<hr>
+
+<hr>
+<h3> Графики с входными параметрами и ответом ИНС </h3>
+<hr>
+
+Данные для расчета вероятности дефолта  </br>
+                Банк: {{b_name}} |
+                Рег. номер:  {{b_regn}} |</br>
+  {{pokaz.10}}  </br>
+{{div2| safe}}
+{{script2| safe}}
+<hr />
+{{pokaz.11}}  </br>
+{{div3| safe}}
+{{script3| safe}}
+<hr />
+{{pokaz.2}}  </br>
+{{div4| safe}}
+{{script4| safe}}
+<hr />
+{{pokaz.3}}  </br>
+{{div5| safe}}
+{{script5| safe}}
+<hr />
+{{pokaz.4}}  </br>
+{{div6| safe}}
+{{script6| safe}}
+<hr />
+{{pokaz.5}}  </br>
+{{div7| safe}}
+{{script7| safe}}
+<hr />
+{{pokaz.6}}  </br>
+{{div8| safe}}
+{{script8| safe}}
+<hr />
+{{pokaz.7}}  </br>
+{{div9| safe}}
+{{script9| safe}}
+<hr />
+{{pokaz.8}}  </br>
+{{div10| safe}}
+{{script10| safe}}
+<hr />
+{{pokaz.9}}  </br>
+{{div11| safe}}
+{{script11| safe}}
+<hr />
+{{pokaz.12}}  </br>
+{{div12| safe}}
+{{script12| safe}}
+<hr />
+{{pokaz.13}}  </br>
+{{div13| safe}}
+{{script13| safe}}
+<hr />
+{{pokaz.14}}  </br>
+{{div14| safe}}
+{{script14| safe}}
+<hr />
+{{pokaz.15}}  </br>
+{{div15| safe}}
+{{script15| safe}}
+<hr />
+{{pokaz.16}}  </br>
+{{div16| safe}}
+{{script16| safe}}
+<hr />
+{{pokaz.17}}  </br>
+{{div17| safe}}
+{{script17| safe}}
+<hr />
+{{pokaz.18}}  </br>
+{{div18| safe}}
+{{script18| safe}}
+<hr />
+{{pokaz.19}}  </br>
+{{div19| safe}}
+{{script19| safe}}
+<hr />
+{{pokaz.20}}  </br>
+{{div20| safe}}
+{{script20| safe}}
+<hr />
+{{pokaz.21}}  </br>
+{{div21| safe}}
+{{script21| safe}}
+
+
+{% endblock %}
+
+

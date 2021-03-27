@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Определение PD{% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.0.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.0.1.min.css"/>
+
+<h3> Отправка почты </h3>
+
+
+
+{% if request.user.is_authenticated %}
+    <form action = "{% url 'ai:mail_success_page' %}" method = "POST">
+
+        {% csrf_token %}
+        <input type="email" required placeholder="Введите адрес электронной почты" name = "name"><br>
+
+
+
+        <button type="submit">Отправить почту</button>
+    </form>
+{% else %}
+       Для продолжения требуется авторизация
+{% endif %}
+
+
+{% endblock %}

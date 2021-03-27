@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}AI{% endblock %}
+
+{% block content %}
+
+<div class="col-md-5">
+          <!  Диспетчер технологических процессов <br />
+          <!  Накопление и анализ больших данных <br />
+          <! Искусственный интеллект (AI) <br />
+          <!Интернет вещей (IoT) <br />
+          <!Мониторинг состояния окружающей среды <br />
+          <!Определение вероятности дефолта (PD) банка  <br />
+
+</div>
+
+<p>
+
+
+    <h3>Цифровые технологии для Вашего предприятия</h3>
+    <br>
+    <table width="1150" border="0">
+        <tr valign="top">
+             <td>
+                {% load static %}
+                 <img src="{% static  'ai/asutp.png' %}" alt="logo"  width="750" height="450">
+            </td>
+            <td>
+               <p>Основные направления деятельности</p>
+             <hr />
+
+                <ul>
+                     <li>
+                         {% url 'webex:detal' 1 as url_webex_detal %}
+                          <a class = " nav_link {% if url_webex_detal == request.path %}activate{% endif %} " href = "{{url_webex_detal}}"> Промышленность</a>
+                     </li>
+                    <li>
+                          {% url 'webex:detal' 4 as url_webex_detal %}
+                          <a class = " nav_link {% if url_webex_detal == request.path %}activate{% endif %} " href = "{{url_webex_detal}}"> Сельское хозяйство</a>
+                    </li>
+                    <li>
+                          {% url 'webex:detal' 3 as url_webex_detal %}
+                          <a class = " nav_link {% if url_webex_detal == request.path %}activate{% endif %} " href = "{{url_webex_detal}}"> Торговля</a>
+                    </li>
+                    <li>
+                        {% url 'webex:detal' 4 as url_webex_detal %}
+                          <a class = " nav_link {% if url_webex_detal == request.path %}activate{% endif %} " href = "{{url_webex_detal}}"> Животноводство</a>
+                    </li>
+                     {% if request.user.is_authenticated %}
+                       {% if request.user.is_superuser %}
+                    <li>
+                        {% url 'ai:nabobj' as url_nabobj %}
+                        <a class = " nav_link {% if url_pdstart == request.path %}activate{% endif %} " href = "{{url_nabobj}}"> Наблюдаемые объекты</a>
+                    </li>
+
+                    <li>
+                        {% url 'ai:starter' Mumuka as url_ai_starter %}
+                         <a class = " nav_link {% if url_ai_starter == request.path %}activate{% endif %} " href = "{{url_ai_starter}}"> Мониторинг</a>
+                    </li>
+                    <li>
+                         {% url 'ai:show' as url_ai_show %}
+                         <a class = " nav_link {% if url_ai_show == request.path %}activate{% endif %} " href = "{{url_ai_show}}"> Телеметрия</a>
+                    </li>
+                     {% endif %}
+                    {% endif %}
+                    <!     <a href="http://127.0.0.1:8000/addcom/"> <! Комментарии</a>
+
+                    <li>
+                         {% url 'ai:pdstart' as url_pdstart %}
+                        <a class = " nav_link {% if url_pdstart == request.path %}activate{% endif %} " href = "{{url_pdstart}}"> Определение вероятности дефолта банка </a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+<p>>>>from Amelina.AnalyticalGroup import Erp, Mes, Hmi, Scada </p>
+<p>>python manage.py runserver</p>
+<hr />
+
+ <table width="1150" border="0">
+        <tr valign="top";colspan="2" style="background-color:#3399FF;">
+             <td >
+
+                <p style=color:white > Все права на материалы предстваленные на сайте являются авторскими правами их соответствующих владельцев </p>
+
+            </td>
+            <td>
+                <p style=color:white > ООО "Аналитическая группа Амелина" </p>
+
+            </td>
+        </tr>
+        <tr>
+
+        </tr>
+ </table>
+
+<hr />
+ <p> Copyright © 2021 ООО Amelina Analytical Group. All Rights Reserved.</p>
+
+
+
+{% endblock %}

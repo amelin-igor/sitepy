@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+
+    <h1 class = "mt-4">Авторизация</h1>
+
+    <p>   <a href = "/">Вернуться назад </a></p>
+
+<div class="col-2">
+    <form id="add_form" method="post">
+
+       {% csrf_token %}
+        {{form}}
+        <button form="add_form" type="submit" class="btn.btn-primary.mt-4"> Войти </button>
+    </form>
+</div>
+ {% url 'ai:password_reset' as url_password_reset %}
+  <p>   <a href = "{{url_password_reset}}">Забыли пароль? </a></p>
+
+{% endblock %}

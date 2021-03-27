@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}PD CALC{% endblock %}
+
+{% block content %}
+
+
+
+
+<table width="1150" border="0">
+        <tr>
+             <td>
+                Отчет о действиях клиента  </br>
+                Клиент: {{first_name}} {{last_name}}  </br>
+                Дата и время формирования отчета:  {{now}}
+
+            </td>
+        </tr>
+    </table>
+
+
+<hr>
+<div class="row">
+    <div class="col">
+       cus.user_id
+    </div>
+    <div class="col">
+       Выполнен расчет по банку:
+    </div>
+    <div class="col">
+       Доступные средства:
+    </div>
+    <div class="col">
+       Дата расчета:
+    </div>
+
+</div>
+<hr>
+
+{% if len_X > 1 %}
+
+       {% for c in tab  %}
+
+<div class="row">
+    <div class="col">
+        {{c.0}}
+    </div>
+    <div class="col">
+        {{c.1}}
+    </div>
+    <div class="col">
+      {{c.2}}
+    </div>
+    <div class="col">
+       {{c.3}}
+    </div>
+
+</div>
+
+
+       {% endfor %}
+    {% else %}
+       Действия со счетом отсутствуют
+    {% endif %}
+
+
+
+
+
+{% endblock %}

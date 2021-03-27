@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Реквизиты{% endblock %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+        {{msg}}
+{% else %}
+       Для продолжения требуется авторизация
+{% endif %}
+
+</br>
+
+       {% for b in banks  %}
+
+<div class="row">
+    <div class="col">
+        {{b}}
+    </div>
+
+</div>
+
+   {% endfor %}
+
+
+
+{% endblock %}

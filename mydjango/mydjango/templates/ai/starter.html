@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}Датчики{% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.0.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.0.1.min.css"/>
+
+
+<table width="1150" border="0">
+        <tr>
+             <td>
+                Данные телеметрии c {{date_first}} по {{date_last}} | {{nabobj_name}} </br>
+                Температура {{t_last}}<sup>o</sup> |
+                Влажность  {{h_last}}% |
+                Концентрация {{gas_name}}  {{CO2_last}} ppm |
+
+                Всего измерений {{len_all}}
+
+{{div| safe}}
+
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.0.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.0.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-api-2.0.1.min.js"></script>
+
+
+{{script|safe}}
+
+            </td>
+            <td>
+                <ul>
+                    <li>
+                         {% url 'webex:detal' 1 as url_webex_detal %}
+                          <a class = " nav_link {% if url_webex_detal == request.path %}activate{% endif %} " href = "{{url_webex_detal}}"> Промышленность</a>
+                     </li>
+                    <li>
+                          {% url 'webex:detal' 4 as url_webex_detal %}
+                          <a class = " nav_link {% if url_webex_detal == request.path %}activate{% endif %} " href = "{{url_webex_detal}}"> Сельское хозяйство</a>
+                    </li>
+                    <li>
+                          {% url 'webex:detal' 3 as url_webex_detal %}
+                          <a class = " nav_link {% if url_webex_detal == request.path %}activate{% endif %} " href = "{{url_webex_detal}}"> Торговля</a>
+                    </li>
+                    <li>
+                        {% url 'webex:detal' 4 as url_webex_detal %}
+                          <a class = " nav_link {% if url_webex_detal == request.path %}activate{% endif %} " href = "{{url_webex_detal}}"> Животноводство</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_superuser %}
+                    <li>
+                        {% url 'ai:nabobj' as url_nabobj %}
+                        <a class = " nav_link {% if url_pdstart == request.path %}activate{% endif %} " href = "{{url_nabobj}}"> Наблюдаемые объекты</a>
+                    </li>
+
+                    <li>
+                        {% url 'ai:starter' Mumuka as url_ai_starter %}
+                         <a class = " nav_link {% if url_ai_starter == request.path %}activate{% endif %} " href = "{{url_ai_starter}}"> Мониторинг</a>
+                    </li>
+                    <li>
+                         {% url 'ai:show' as url_ai_show %}
+                         <a class = " nav_link {% if url_ai_show == request.path %}activate{% endif %} " href = "{{url_ai_show}}"> Телеметрия</a>
+                    </li>
+                    {% endif %}
+                    {% endif %}
+
+                    <!    <a href="http://127.0.0.1:8000/addcom/"> <!Комментарии</a>
+
+                    <li>
+                         {% url 'ai:pdstart' as url_pdstart %}
+                        <a class = " nav_link {% if url_pdstart == request.path %}activate{% endif %} " href = "{{url_pdstart}}"> Определение вероятности дефолта банка </a>
+                    </li>
+                </ul>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+
+
+
+
+
+
+<hr>
+  {{latest_data_list.meter_title}}
+
+                            {% if metter_of_buryonka %}
+                                {% for c in metter_of_buryonka %}
+                                    <p>
+                                        {{nabobj_name}} | {{c.meter_datetime}} | температура={{c.meter_temperature}}<sup>o</sup> | влажность={{c.meter_humidity}}% | {{gas_name}}={{c.meter_CO2}} ppm </br>
+                                    </p>
+                                {% endfor %}
+
+                            {% else %}
+                                    Измерения не найдены.
+                            {% endif %}
+
+
+    </hr>
+
+
+
+
+
+
+
+{% endblock %}

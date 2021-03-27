@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Реквизиты{% endblock %}
+
+{% block content %}
+
+
+
+    {% if request.user.is_authenticated %}
+
+        <h3>{{msg}} </h3>
+        </br>
+
+    {% else %}
+           Для продолжения требуется авторизация
+    {% endif %}
+
+
+{% endblock %}

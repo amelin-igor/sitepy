@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Реквизиты{% endblock %}
+
+{% block content %}
+
+<style type='text/css'>
+	input, textarea {border-color: red; }
+</style>
+
+{% if request.user.is_authenticated %}
+
+    <h5> Если Вы действуете от имени и/или по поручению юридического лица установите галочку и заполните следующую форму. Для регистрации юридического лица все поля в форме представленной ниже являются обязательными. Кодовое слово было отправлено на Ваш e-mail. Если Вы регистрируетесь как физическое лицо, снимите галочку и введите только кодовое слово. </h5>
+
+<div class="col-12">
+    <form action = "{% url 'ai:fillrec_page' %}" method = "POST">
+
+        {% csrf_token %}
+        </br>
+        <input id="ul_fl"  name="ul_fl" type="checkbox" title="Установите галочку для регистрации юридического лица" value="true" checked> Установите галочку для регистрации юридического лица</br>
+        <hr>
+
+        <input id="client_name" name="client_name" type="text" placeholder="Наименование организации" value="{{client_name_2}}" >   -  Наименование организации </br>
+        </br>
+        <input id="client_name_full" name="client_name_full" type="text" placeholder="Наименование организации (полное)" value="{{client_name_full_2}}"> - Наименование организации (полное) </br>
+        </br>
+        <input id="adres" name="adres" type="text" placeholder="Адрес" value="{{adres_2}}"> - Адрес регистрации </br>
+        </br>
+        <input id="inn" name="inn" type="text" placeholder="ИНН" value="{{inn_2}}">  - ИНН </br>
+        </br>
+        <input id="kpp" name="kpp" type="text" placeholder="КПП"  value="{{kpp_2}}"> - КПП </br>
+       </br>
+        <input id="ogrn" name="ogrn" type="text" placeholder="ОГРН"  value="{{ogrn_2}}"> - ОГРН / ОГРНИП </br>
+        </br>
+        <input id="country" name="country" type="text" placeholder="Страна" value="{{country_2}}">  - Страна </br>
+        </br>
+        <input id="coodeword" name="codeword" type="text" placeholder="Кодовое слово"  value="{{coodeword_2}}"   >  - Кодовое слово </br>
+        <hr>
+
+
+
+        <input class="btn btn-primary" type="submit" value="Сохранить"> {{msg}}
+        <! <button type="submit"> <!Сохранить<!</button>
+        <hr>
+    </form>
+
+    </div>
+
+{% else %}
+       Для продолжения требуется авторизация
+{% endif %}
+
+
+
+
+
+
+{% endblock %}

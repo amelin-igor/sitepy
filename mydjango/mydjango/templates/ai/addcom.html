@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Comments{% endblock %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.0.1.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.0.1.min.css"/>
+
+<h1> Addcom </h1>
+
+
+<hr>
+    {{metter_of_buryonka.meter_title}}
+
+    {% if metter_of_buryonka %}
+        {% for c in metter_of_buryonka %}
+            <p>
+               {{c.meter_title}} | {{c.meter_datetime}} | температура={{c.meter_temperature}} C | влажность={{c.meter_humidity}}% </br>
+            </p>
+        {% endfor %}
+
+    {% else %}
+        Измерения не найдены.
+    {% endif %}
+
+
+    {% if latest_comments_list %}
+        {% for c in latest_comments_list %}
+            <p>
+                <strong>{{c.author_name}}</strong>
+                <p>{{c.comment_text}}</p>
+            </p>
+        {% endfor %}
+
+    {% else %}
+        Комментарии не найдены. Вы можете добавить комментарии.
+    {% endif %}
+
+    <hr>
+
+<form action = "{% url 'ai:leave_comment2' metering.id %}" method = "POST">
+
+        {% csrf_token %}
+        <input type="text" required placeholder="Ваше имя" name = "name"><br>
+        <textarea name = "text" required = "" placeholder="Текст комментария" cols="30" rows="10"></textarea><br>
+
+        <button type="submit">Оставить комментарий</button>
+
+    </form>
+
+{% endblock %}

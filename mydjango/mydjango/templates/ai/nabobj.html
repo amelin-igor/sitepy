@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Список объектов{% endblock %}
+
+{% block content %}
+
+  {% if cow_metering_list %}
+        {% for a in cow_metering_list %}
+
+              <a href="{% url 'ai:cows_page' a %}">{{a}}</a>
+              <br />
+
+        {% endfor %}
+   {% else %}
+     Статьи не найдены
+   {% endif %}
+
+{% endblock %}
+
+
+
