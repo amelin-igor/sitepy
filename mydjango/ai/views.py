@@ -1834,3 +1834,5 @@ class MyPasswordResetCompleteView(PasswordResetCompleteView):
     def get_success_url(self):
         return self.success_url
 
+def remotecontrol(request):
+    pass
