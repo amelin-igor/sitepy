@@ -50,22 +50,14 @@ INSTALLED_APPS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#EMAIL_USE_TLS = True
-#EMAIL_HOST = 'cpanel4.v.fozzy.com'
-#EMAIL_PORT = 465
-#EMAIL_HOST_USER = 'igor@amelin-gba.com'
-#EMAIL_HOST_PASSWORD = 'QepzCn60jUhr'
-#DEFAULT_FROM_EMAIL = 'amelin-gba.com'
-#DEFAULT_TO_EMAIL = 'igor@amelin-gba.com'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'amelin.partners@gmail.com'
-EMAIL_HOST_PASSWORD = 'AME_summertimenilema_111'
+EMAIL_HOST_USER = 'example.partners@gmail.com'
+EMAIL_HOST_PASSWORD = 'example_2081'
 DEFAULT_FROM_EMAIL = 'AGA'
-DEFAULT_TO_EMAIL = 'amelin.partners@gmail.com'
+DEFAULT_TO_EMAIL = 'example.partners@gmail.com'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
