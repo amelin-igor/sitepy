@@ -24,7 +24,7 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y%3qw13r(1vvhnevb01frp9k47vlcbywp(j+^s7&sik@#ulm3$'
+SECRET_KEY = 'qwevma[out5oihtg;vgbg85garngn##$^&*()&^%%%^*(((('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
