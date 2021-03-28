@@ -1835,4 +1835,25 @@ class MyPasswordResetCompleteView(PasswordResetCompleteView):
         return self.success_url
 
 def remotecontrol(request):
-    pass
+    X = []
+    try:
+        a = User.objects.get(id=request.user.id)
+    except:
+        raise Http404("Пользователь отсутствует")
+    print("User.is_authenticated = ", request.user.is_authenticated)
+    print(request.user.id)
+    print(request.user.first_name)
+    print(request.user.last_name)
+    print(request.user.id)
+
+    X.append(a.email)
+
+    print('a.email = ')
+    print(a.email)
+
+    if len(a.email) == 0:
+        resp = 'no email'
+    else:
+        resp = a.email
+
+    return resp
